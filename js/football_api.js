@@ -1,3 +1,4 @@
+var base_url = 'https://api.football-data.org/';
 function status (response) {
     if (response.status !== 200) {
         console.log('Error : ' + response.status);
@@ -21,7 +22,7 @@ function error (error) {
 
 function getKlasemen() {
 
-    fetch('https://api.football-data.org/v2/competitions/2021/standings',{
+    fetch(base_url+ 'v2/competitions/2021/standings',{
         
         method: "GET",
         headers:{
@@ -96,7 +97,7 @@ function getTeamById(is_favorite) {
     var coach = '';
     var urlParams = new URLSearchParams(window.location.search);
     var idParam = urlParams.get("id");     
-    fetch('https://api.football-data.org/v2/teams/' +idParam,{
+    fetch(base_url + 'v2/teams/' +idParam,{
         method: "GET",
         headers:{
             "X-AUTH-TOKEN": "aa3f2e8a4dda48eea2a4f3f86e1d420f"
@@ -202,7 +203,7 @@ function getTeamById(is_favorite) {
 
 function getMatches() {
 
-    fetch('https://api.football-data.org/v2/competitions/2021/matches?status=SCHEDULED',{
+    fetch(base_url + 'v2/competitions/2021/matches?status=SCHEDULED',{
         
         method: "GET",
         headers:{
@@ -255,7 +256,7 @@ function getMatches() {
 
 
 
-    fetch('https://api.football-data.org/v2/competitions/2021/matches?status=FINISHED',{
+    fetch(base_url + 'v2/competitions/2021/matches?status=FINISHED',{
         
         method: "GET",
         headers:{
@@ -314,7 +315,7 @@ function getMatches() {
 function getMatchById() {
     var urlParams = new URLSearchParams(window.location.search);
     var idParam = urlParams.get("id");    
-    fetch('https://api.football-data.org//v2/matches/' +idParam,{
+    fetch(base_url + 'v2/matches/' +idParam,{
         method: "GET",
         headers:{
             "X-AUTH-TOKEN": "aa3f2e8a4dda48eea2a4f3f86e1d420f"

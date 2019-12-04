@@ -38,6 +38,16 @@ function addToFavorite() {
     return result; 
   }).then(function(val) {
     if(val){
+      dbPromise.then(function(db) {
+        var tx = db.transaction('team', 'readwrite');
+        var store = tx.objectStore('team');
+        store.delete(data.id);
+        return tx.complete;
+      }).then(function() {
+        location.reload();
+        M.toast({html: 'Team berhasil dihapus dari daftar favorit', classes: 'rounded'})
+        console.log('Item deleted from favorite');
+      });
     } else{
       dbPromise.then(function(db) {
         
@@ -53,9 +63,12 @@ function addToFavorite() {
         store.add(item); //menambahkan key "team"
         return tx.complete;
       }).then(function() {
-        console.log('Team berhasil disimpan.');
+        location.reload();
+        M.toast({html: 'Team berhasil ditambahkan ke daftar favorit', classes: 'rounded'})
+        console.log('Team berhasil ditambahkan ke daftar favorit');
       }).catch(function() {
-        console.log('Team gagal disimpan.')
+        M.toast({html: 'Team berhasil ditambahkan ke daftar favorit', classes: 'rounded'})
+        console.log('Team gagal disimpan ke daftar favorit')
       })
       
     }
