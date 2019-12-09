@@ -7,6 +7,7 @@ var urlsToCache = [
   "/pages/pertandingan.html",
   "/pages/favorit.html",
   "/tim.html",
+  "/tim_fav.html",
   "/detail_match.html",
   "/css/materialize.min.css",
   "/css/custom.css",

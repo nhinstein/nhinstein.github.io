@@ -58,6 +58,13 @@ function loadPage(page) {
           });
           getMatches();
         }
+        else if(page == 'favorit'){     
+          $(document).ready(function(){
+            $('.tabs').tabs();
+          });
+          showTeamFav();
+          showMatchFav();
+        }
       } else if (this.status == 404) {
         content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
       } else {

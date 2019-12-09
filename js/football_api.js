@@ -125,12 +125,6 @@ function showTeam(data, is_favorite) {
     if (is_favorite == true) {
         icon = `<i class="material-icons custom pink-text">favorited</i>`
     }
-    obj = {
-        'id': data.id,
-        'name': data.name,
-        'founded': data.founded
-    };
-    // localStorage["team"] = JSON.stringify(data);
     var data_team = JSON.stringify(data)
     document.getElementById("spinner").hidden = true;
     var dataHtml = `
@@ -387,9 +381,14 @@ function getMatches() {
 
 }
 
-function showMatch(data){
+function showMatch(data, is_favorite){    
+    var icon = `<i class="material-icons custom">favorite_border</i>`
+    if (is_favorite == true) {
+        icon = `<i class="material-icons custom pink-text">favorited</i>`
+    }
     console.log(data);
     var match = data.match;
+    var data_match = JSON.stringify(data);
     document.getElementById("spinner").hidden = true;
     var dataHtml = `
 <div class="row">
@@ -402,11 +401,10 @@ function showMatch(data){
     <div class="col s12">
     <div class="card">
     <div class="card-content">
-    <div class="row float-right"><div class="col>
-    <a href="./index.html" class="float-right">
-    <i class="material-icons custom">favorite_border</i>
-    </a>
-    </div></div>
+    <div class="row float-right"><div class="col ">
+    <a onclick='addMatchToFavorite(${data_match})' class="float-right btn-fav">
+    ${icon}
+    </a></div></div>
     <h6 class="center"> ${parse_date} </h6>
     <h6 class="center"> ${parse_hour} </h6>
     <br>
@@ -447,7 +445,7 @@ function showMatch(data){
 
 }
 
-function getMatchById() {
+function getMatchById(is_favorite) {
     if ("caches" in window) {
         caches.match(URL_MATCHES + idParam).then(function (response) {
             if (response) {
@@ -469,6 +467,6 @@ function getMatchById() {
         .then(status)
         .then(json)
         .then(function (data) {
-            showMatch(data);
+            showMatch(data, is_favorite);
         }).catch(error);
 }
