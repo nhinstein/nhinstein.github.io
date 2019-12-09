@@ -8,6 +8,7 @@ var dbPromise = idb.open("boladb", 1, function(upgradeDb) {
 var isFavorite = function(){
   var urlParams = new URLSearchParams(window.location.search);
   var idParam = urlParams.get("id"); 
+  
   dbPromise.then(function(db) {
     var tx = db.transaction('team', 'readonly');
     var store = tx.objectStore('team');
@@ -24,11 +25,11 @@ var isFavorite = function(){
 }
 
 
-function addToFavorite() {
+function addToFavorite(data_team) {
   console.log('masuppp');
-  var data = JSON.parse(localStorage["team"]);
-  let is_exists = isFavorite();
-  console.log(is_exists);
+  console.log('tes', data_team);
+  
+  var data = data_team;
   var urlParams = new URLSearchParams(window.location.search);
   var idParam = urlParams.get("id"); 
   dbPromise.then(function(db) {

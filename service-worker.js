@@ -1,4 +1,4 @@
-const CACHE_NAME = "cachebola";
+const CACHE_NAME = "cachebola2";
 var urlsToCache = [
   "/",
   "/nav.html",
@@ -22,6 +22,7 @@ var urlsToCache = [
 ];
  
 self.addEventListener("install", function(event) {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.addAll(urlsToCache);
