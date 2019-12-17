@@ -1,4 +1,4 @@
-const CACHE_NAME = "cachebola2";
+const CACHE_NAME = "bula-bola";
 var urlsToCache = [
   "/",
   "/nav.html",

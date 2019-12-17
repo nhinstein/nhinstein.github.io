@@ -20,7 +20,6 @@ var isFavorite = function(){
     var result = store.get(parseInt(idParam));
     return result; 
   }).then(function(val) {
-    console.log(val);
     var is_favorite = false;
     if(val){
       is_favorite = true;
@@ -30,10 +29,7 @@ var isFavorite = function(){
 }
 
 
-function addToFavorite(data_team) {
-  console.log('masuppp');
-  console.log('tes', data_team);
-  
+function addToFavorite(data_team) {  
   var data = data_team;
   var urlParams = new URLSearchParams(window.location.search);
   var idParam = urlParams.get("id"); 
@@ -119,8 +115,6 @@ function showTeamFav(){
     var store = tx.objectStore('team');
     return store.getAll();
   }).then(function(items) {
-    console.log('Data yang diambil: ');
-    console.log(items);
     elFav(items);
   });
 
@@ -136,7 +130,6 @@ function showFavTeam(){
     // mengambil primary key berdasarkan isbn
     return store.get(parseInt(idParam)); 
   }).then(function(val) {
-    console.dir(val);
     showTeam(val, true)
   });
 }
@@ -154,7 +147,6 @@ var isMatchFavorite = function(){
     var result = store.get(parseInt(idParam));
     return result; 
   }).then(function(val) {
-    console.log(val);
     var is_favorite = false;
     if(val){
       is_favorite = true;
@@ -193,9 +185,11 @@ function addMatchToFavorite(data_match) {
         var store = tx.objectStore('match');
         var item = {
             match: data.match,
-            id: data.id,
+            id: data.match.id,
             created: new Date().getTime()
         };
+        console.log(data);
+        
         store.add(item); //menambahkan key "match"
         return tx.complete;
       }).then(function() {
@@ -262,8 +256,6 @@ function showMatchFav(){
     var store = tx.objectStore('match');
     return store.getAll();
   }).then(function(items) {
-    console.log('Data yang diambil: ');
-    console.log(items);
     elMatchFav(items);
   });
 
@@ -279,7 +271,6 @@ function showFavMatch(){
     // mengambil primary key berdasarkan isbn
     return store.get(parseInt(idParam)); 
   }).then(function(val) {
-    console.dir(val);
     showMatch(val, true)
   });
 }

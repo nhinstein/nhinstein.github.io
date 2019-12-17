@@ -1,7 +1,7 @@
 {
-    "name": "My CV",
-    "short_name": "My CV",
-    "description": "Aplikasi PWA pertama saya",
+    "name": "Bula Bola",
+    "short_name": "Bula Bola",
+    "description": "Aplikasi Bola",
     "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#ee6e73",

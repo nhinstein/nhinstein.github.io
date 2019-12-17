@@ -33,7 +33,6 @@ function error(error) {
 }
 
 function showKlasemen(data) {
-    console.log(data);
     document.getElementById("spinner").hidden = true;
     var dataHtml = `
     <div class="card">
@@ -98,7 +97,6 @@ function getKlasemen() {
         caches.match(URL_STANDING).then(function (response) {
             if (response) {
                 response.json().then(function (data) {
-                    console.log("Klasemen Data: " + data);
                     showKlasemen(data);
                 })
             }
@@ -220,7 +218,6 @@ function getTeamById(is_favorite) {
         caches.match(URL_TEAM + idParam).then(function (response) {
             if (response) {
                 response.json().then(function (data) {
-                    console.log("Competition Data: " + data);
                     showTeam(data, is_favorite);
                 })
             }
@@ -241,7 +238,6 @@ function getTeamById(is_favorite) {
 
 function showScheduled(data){
     team_list = [];
-    console.log(data);
     document.getElementById("spinner").hidden = true;
     var dataHtml = `
     <div class="row">`;
@@ -284,7 +280,6 @@ function showScheduled(data){
 
 function showFinished(data){
     team_list = [];
-    console.log(data);
     document.getElementById("spinner").hidden = true;
     var dataHtml = `
     <div class="row">`;
@@ -333,7 +328,6 @@ function getMatches() {
         caches.match(URL_SCHEDULED).then(function (response) {
             if (response) {
                 response.json().then(function (data) {
-                    console.log("Competition Data: " + data);
                     showScheduled(data);
                 })
             }
@@ -358,7 +352,6 @@ function getMatches() {
         caches.match(URL_FINISHED).then(function (response) {
             if (response) {
                 response.json().then(function (data) {
-                    console.log("Competition Data: " + data);
                     showFinished(data)
                 })
             }
@@ -386,7 +379,6 @@ function showMatch(data, is_favorite){
     if (is_favorite == true) {
         icon = `<i class="material-icons custom pink-text">favorited</i>`
     }
-    console.log(data);
     var match = data.match;
     var data_match = JSON.stringify(data);
     document.getElementById("spinner").hidden = true;
@@ -450,7 +442,6 @@ function getMatchById(is_favorite) {
         caches.match(URL_MATCHES + idParam).then(function (response) {
             if (response) {
                 response.json().then(function (data) {
-                    console.log("Competition Data: " + data);
                     showMatch(data)
                 })
             }
