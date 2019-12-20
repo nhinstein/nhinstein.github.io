@@ -8,11 +8,12 @@
   <link rel="stylesheet" href="css/materialize.min.css">
   <link rel="stylesheet" href="css/custom.css">
   <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png">
   <meta name="theme-color" content="#ee6e73"/>
 </head>
 <body class="indigo lighten-5">
   <!-- Navigasi -->
-  <nav class="light-blue accent-1" role="navigation">
+  <nav class="default-primary-color" role="navigation">
     <div class="nav-wrapper container">
       <a href="index.html" class="brand-logo" id="logo-container">BulaBola</a>
       <a href="#" class="sidenav-trigger" data-target="nav-mobile">☰</a>
@@ -107,27 +108,6 @@ if ('Notification' in window) {
     }
     return outputArray;
 }
-
-if ("Notification" in window) {
-      requestPermission();
-    } else {
-      console.error("Browser tidak mendukung notifikasi.");
-    }
-    
-    // Meminta ijin menggunakan Notification API
-    function requestPermission() {
-      Notification.requestPermission().then(function (result) {
-        if (result === "denied") {
-          console.log("Fitur notifikasi tidak diijinkan.");
-          return;
-        } else if (result === "default") {
-          console.error("Pengguna menutup kotak dialog permintaan ijin.");
-          return;
-        }
-        
-        console.log("Fitur notifikasi diijinkan.");
-      });
-    }
   
   </script>
 </body>

@@ -46,7 +46,7 @@ function addToFavorite(data_team) {
         store.delete(data.id);
         return tx.complete;
       }).then(function() {
-        location.reload();
+        window.location = window.location.origin + '/index.html#favorit';
         M.toast({html: 'Team berhasil dihapus dari daftar favorit', classes: 'rounded'})
         console.log('Item deleted from favorite');
       });
@@ -82,12 +82,11 @@ function addToFavorite(data_team) {
 function elFav(data) {
 
   document.getElementById("spinner").hidden = true;
-  var dataHtml = ``;
+  var dataHtml = `<div class="row">`;
 
   data.forEach(function (team) {
     var data_team = JSON.stringify(team)
     dataHtml += `
-    <div class="row">
     <div class="col s12 l3 m4">
       <div class="card">
         <div class="card-image">
@@ -104,6 +103,7 @@ function elFav(data) {
     </div>
   </div>`
     });
+    dataHtml += `</div>`
 
   document.getElementById("data_teamfav").innerHTML = dataHtml;
 
@@ -174,7 +174,7 @@ function addMatchToFavorite(data_match) {
         store.delete(data.id);
         return tx.complete;
       }).then(function() {
-        location.reload();
+        window.location = window.location.origin + '/index.html#favorit';
         M.toast({html: 'Match berhasil dihapus dari daftar favorit', classes: 'rounded'})
         console.log('Item deleted from favorite');
       });

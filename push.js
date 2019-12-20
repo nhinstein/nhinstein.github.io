@@ -28,4 +28,10 @@ webPush.sendNotification(
    pushSubscription,
    payload,
    options
-);
+)
+.then(function (statusCode, headers, body) {
+ console.log('tes', statusCode);
+})
+.catch(function (statusCode, headers, body) {
+ console.log('tes2', statusCode);
+})

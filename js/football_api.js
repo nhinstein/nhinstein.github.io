@@ -39,7 +39,7 @@ function showKlasemen(data) {
     <div class="card-content">
     <h4 class="center">Klasemen Season ${data.season.startDate} - ${data.season.endDate}</h4>
     <div style="overflow-x:auto;">
-    <table>
+    <table class="responsive-table">
     <thead>
       <tr>
           <th>Klub</th>
@@ -54,7 +54,7 @@ function showKlasemen(data) {
     <tbody>`;
     data.standings.forEach(function (standing) {
         if (standing.type == 'TOTAL') {
-            // dataHtml += `<tr class="light-blue accent-1"><td colspan="6" class="center">${standing.group}</td></tr>`;
+            // dataHtml += `<tr class="default-primary-color"><td colspan="6" class="center">${standing.group}</td></tr>`;
             standing.table.forEach(function (table) {
                 dataHtml += `
                 <tr>
@@ -173,7 +173,7 @@ function showTeam(data, is_favorite) {
         <div class="col s12">
         <h4 class="center">Squad</h4>
         <div style="overflow-x:auto;">
-        <table>
+        <table class="responsive-table">
         <thead>
         <tr>
             <th>Nama</th>
@@ -438,6 +438,8 @@ function showMatch(data, is_favorite){
 }
 
 function getMatchById(is_favorite) {
+    var urlParams = new URLSearchParams(window.location.search);
+    var idParam = urlParams.get("id");
     if ("caches" in window) {
         caches.match(URL_MATCHES + idParam).then(function (response) {
             if (response) {
@@ -447,8 +449,6 @@ function getMatchById(is_favorite) {
             }
         })
     }
-    var urlParams = new URLSearchParams(window.location.search);
-    var idParam = urlParams.get("id");
     fetch(URL_MATCHES + idParam, {
             method: "GET",
             headers: {

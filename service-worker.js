@@ -1,4 +1,4 @@
-const CACHE_NAME = "bula-bola";
+const CACHE_NAME = "cachebola";
 var urlsToCache = [
   "/",
   "/nav.html",
@@ -19,7 +19,13 @@ var urlsToCache = [
   "/js/db.js",
   "/js/nav.js",
   "/manifest.json",
-  "/icon.png",
+  "/images/icons/icon-72x72.png",
+  "/images/icons/icon-96x96.png",
+  "/images/icons/icon-128x128.png",
+  "/images/icons/icon-152x152.png",
+  "/images/icons/icon-192x192.png",
+  "/images/icons/icon-384x384.png",
+  "/images/icons/icon-512x512.png",
 ];
  
 self.addEventListener("install", function(event) {
@@ -64,5 +70,26 @@ self.addEventListener("activate", function(event) {
         })
       );
     })
+  );
+});
+
+self.addEventListener('push', function (event) {
+  var body;
+  if (event.data) {
+      body = event.data.text();
+  } else {
+      body = 'Push message no payload';
+  }
+  var options = {
+      body: body,
+      icon: 'icon.png',
+      vibrate: [100, 50, 100],
+      data: {
+          dateOfArrival: Date.now(),
+          primaryKey: 1
+      }
+  };
+  event.waitUntil(
+      self.registration.showNotification('Push Notification', options)
   );
 });
