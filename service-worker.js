@@ -1,77 +1,51 @@
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
 const CACHE_NAME = "cachebola";
-var urlsToCache = [
-  "/",
-  "/nav.html",
-  "/index.html",
-  "/pages/klasemen.html",
-  "/pages/pertandingan.html",
-  "/pages/favorit.html",
-  "/tim.html",
-  "/tim_fav.html",
-  "/detail_match.html",
-  "/css/materialize.min.css",
-  "/css/custom.css",
-  "/js/materialize.min.js",
-  "/js/jquery-3.2.1.min.js",
-  "/js/moment-with-locales.js",
-  "/js/football_api.js",
-  "/js/idb.js",
-  "/js/db.js",
-  "/js/nav.js",
-  "/manifest.json",
-  "/images/icons/icon-72x72.png",
-  "/images/icons/icon-96x96.png",
-  "/images/icons/icon-128x128.png",
-  "/images/icons/icon-152x152.png",
-  "/images/icons/icon-192x192.png",
-  "/images/icons/icon-384x384.png",
-  "/images/icons/icon-512x512.png",
-];
- 
-self.addEventListener("install", function(event) {
-  self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(urlsToCache);
-    })
-  );
-});
 
-self.addEventListener("fetch", function(event) {
-  var base_url = "https://api.football-data.org/";
+if (workbox)
+  console.log(`Workbox berhasil dimuat`);
+else
+  console.log(`Workbox gagal dimuat`);
 
-  if (event.request.url.indexOf(base_url) > -1) {
-    event.respondWith(
-      caches.open(CACHE_NAME).then(function(cache) {
-        return fetch(event.request).then(function(response) {
-          cache.put(event.request.url, response.clone());
-          return response;
-        })
-      })
-    );
-  } else {
-    event.respondWith(
-      caches.match(event.request, { ignoreSearch: true }).then(function(response) {
-        return response || fetch (event.request);
-      })
-    )
-  }
-});
+  workbox.precaching.precacheAndRoute([
+    { url: '/index.html', revision: '1' },
+    { url: '/nav.html', revision: '1' },
+    { url: '/css/materialize.min.css', revision: '1' },
+    { url: '/css/custom.css', revision: '1' },
+    { url: '/detail_match_fav.html', revision: '1' },
+    { url: '/detail_match.html', revision: '1' },
+    { url: '/tim.html', revision: '1' },
+    { url: '/tim_fav.html', revision: '1' },
+]);
 
-self.addEventListener("activate", function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheName != CACHE_NAME) {
-            console.log("ServiceWorker: cache " + cacheName + " dihapus");
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
+workbox.routing.registerRoute(
+  new RegExp('/images/icons/'),
+  workbox.strategies.staleWhileRevalidate({
+      cacheName: 'icons'
+  })
+);
+
+workbox.routing.registerRoute(
+  new RegExp('/js/'),
+  workbox.strategies.staleWhileRevalidate({
+      cacheName: 'js'
+  })
+);
+
+
+workbox.routing.registerRoute(
+  new RegExp('/pages/'),
+  workbox.strategies.staleWhileRevalidate({
+    cacheName: 'pages'
+  })
+);
+
+workbox.routing.registerRoute(
+  newRegex("https://api.football-data.org/"),
+  new workbox.strategies.networkFirst({
+    networkTimeoutSeconds: 3,
+    cacheName: 'cache-api',
+  })
+);
 
 self.addEventListener('push', function (event) {
   var body;
