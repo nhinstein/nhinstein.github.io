@@ -55,12 +55,13 @@ function addToFavorite(data_team) {
         
         var tx = db.transaction('team', 'readwrite');
         var store = tx.objectStore('team');
+        var crestUrl = data.crestUrl.replace(/^http:\/\//i, 'https://');
         var item = {
             name: data.name,
             id: data.id,
             founded: data.founded,
             squad: data.squad,
-            crestUrl: data.crestUrl,
+            crestUrl: crestUrl,
             address: data.address,
             created: new Date().getTime()
         };
@@ -86,11 +87,12 @@ function elFav(data) {
 
   data.forEach(function (team) {
     var data_team = JSON.stringify(team)
+    var crestUrl = team.crestUrl.replace(/^http:\/\//i, 'https://');
     dataHtml += `
     <div class="col s12 l3 m4">
       <div class="card">
         <div class="card-image">
-          <img src=${team.crestUrl} height="300">
+          <img src=${crestUrl} height="300">
         </div>
         <div class="card-content">
         <h4>${team.name}</h4>

@@ -56,13 +56,14 @@ function showKlasemen(data) {
         if (standing.type == 'TOTAL') {
             // dataHtml += `<tr class="default-primary-color"><td colspan="6" class="center">${standing.group}</td></tr>`;
             standing.table.forEach(function (table) {
+                var crestUrl = table.team.crestUrl.replace(/^http:\/\//i, 'https://');
                 dataHtml += `
                 <tr>
                     <td>
                     <div class="row valign-wrapper">
                     <div class="col s1">
                     
-                <img class="custom_logo" src="${table.team.crestUrl}">
+                <img class="custom_logo" src="${crestUrl}">
                     </div>
                     <div class="col s10">
                     <a href="./tim.html?id=${table.team.id}"><span class="blue-text">
@@ -123,6 +124,7 @@ function showTeam(data, is_favorite) {
     if (is_favorite == true) {
         icon = `<i class="material-icons custom pink-text">favorited</i>`
     }
+    var crestUrl = data.crestUrl.replace(/^http:\/\//i, 'https://');
     var data_team = JSON.stringify(data)
     document.getElementById("spinner").hidden = true;
     var dataHtml = `
@@ -133,7 +135,7 @@ function showTeam(data, is_favorite) {
         </a></div></div>
         <div class="row mt-1 card-content">
         <div class="col s12 l3">
-        <img src="${data.crestUrl}" class="responsive-img">
+        <img src="${crestUrl}" class="responsive-img">
         </div>
 
         <div class="col s12 l9">

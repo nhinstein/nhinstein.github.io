@@ -40,7 +40,7 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  newRegex("https://api.football-data.org/"),
+  new RegExp("https://api.football-data.org/"),
   new workbox.strategies.networkFirst({
     networkTimeoutSeconds: 3,
     cacheName: 'cache-api',
