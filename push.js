@@ -21,7 +21,7 @@ var pushSubscription = {
 var payload = 'Selamat! Aplikasi Anda sudah dapat menerima push notifikasi!';
  
 var options = {
-   gcmAPIKey: '1010252627316',
+   gcmAPIKey: '434601759432',
    TTL: 60
 };
 webPush.sendNotification(
