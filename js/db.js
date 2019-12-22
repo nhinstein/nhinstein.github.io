@@ -83,7 +83,7 @@ function addToFavorite(data_team) {
 function elFav(data) {
 
   document.getElementById("spinner").hidden = true;
-  var dataHtml = `<div class="row">`;
+  var dataHtml=``;
 
   data.forEach(function (team) {
     var data_team = JSON.stringify(team)
@@ -105,7 +105,6 @@ function elFav(data) {
     </div>
   </div>`
     });
-    dataHtml += `</div>`
 
   document.getElementById("data_teamfav").innerHTML = dataHtml;
 
