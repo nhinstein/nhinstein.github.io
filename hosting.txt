@@ -1,4 +1,4 @@
-https://bula-bola.firebaseapp.com/index.html
+https://bula-bola.firebaseapp.com
 
 
 https://github.com/nhinstein/bulabola
