@@ -1,10 +1,7 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
-const CACHE_NAME = "cachebola";
 
-if (workbox)
+if (workbox){
   console.log(`Workbox berhasil dimuat`);
-else
-  console.log(`Workbox gagal dimuat`);
 
   workbox.precaching.precacheAndRoute([
     { url: '/index.html', revision: '1' },
@@ -15,7 +12,10 @@ else
     { url: '/detail_match.html', revision: '1' },
     { url: '/tim.html', revision: '1' },
     { url: '/tim_fav.html', revision: '1' },
-]);
+    { url: '/manifest.json', revision: '1' },
+],{
+  ignoreUrlParametersMatching: [/.*/]}
+);
 
 workbox.routing.registerRoute(
   new RegExp('/images/icons/'),
@@ -39,13 +39,24 @@ workbox.routing.registerRoute(
   })
 );
 
+
 workbox.routing.registerRoute(
   new RegExp("https://api.football-data.org/"),
-  new workbox.strategies.networkFirst({
-    networkTimeoutSeconds: 3,
+  new workbox.strategies.NetworkFirst({
+    networkTimeoutSeconds: 5,
     cacheName: 'cache-api',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxAgeSeconds: 60 * 60 * 24,
+        maxEntries: 50,
+      }),
+    ],
   })
 );
+}
+else
+  console.log(`Workbox gagal dimuat`);
+
 
 self.addEventListener('push', function (event) {
   var body;
