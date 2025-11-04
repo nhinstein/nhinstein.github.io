@@ -108,7 +108,8 @@ function getKlasemen() {
 
             method: "GET",
             headers: {
-                "X-AUTH-TOKEN": API_KEY
+                "X-AUTH-TOKEN": API_KEY,
+                "Access-Control-Allow-Origin": "*"
             }
         })
         .then(status)
@@ -228,7 +229,8 @@ function getTeamById(is_favorite) {
     fetch(URL_TEAM + idParam, {
             method: "GET",
             headers: {
-                "X-AUTH-TOKEN": API_KEY
+                "X-AUTH-TOKEN": API_KEY,
+                "Access-Control-Allow-Origin": "*"
             }
         })
         .then(status)
@@ -340,7 +342,8 @@ function getMatches() {
 
             method: "GET",
             headers: {
-                "X-AUTH-TOKEN": API_KEY
+                "X-AUTH-TOKEN": API_KEY,
+                "Access-Control-Allow-Origin": "*"
             }
         })
         .then(status)
@@ -454,7 +457,8 @@ function getMatchById(is_favorite) {
     fetch(URL_MATCHES + idParam, {
             method: "GET",
             headers: {
-                "X-AUTH-TOKEN": API_KEY
+                "X-AUTH-TOKEN": API_KEY,
+                "Access-Control-Allow-Origin": "*"
             }
         })
         .then(status)
