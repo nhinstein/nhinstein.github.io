@@ -1,7 +1,7 @@
 const BASE_URL = 'https://api.football-data.org/v4/';
 const API_KEY = "e3a98f6df6d84c3d891d711c6fee3410";
 
-const ID_LEAGUE = 2021;
+const ID_LEAGUE = 2024;
 
 const URL_STANDING = `${BASE_URL}competitions/${ID_LEAGUE}/standings`;
 const URL_TEAM = `${BASE_URL}teams/`;
